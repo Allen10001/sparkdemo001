@@ -23,13 +23,14 @@ public class WordCountJava {
                 .setMaster("local[4]");
 
         JavaSparkContext jsc = new JavaSparkContext(conf);
-        JavaRDD<String> lines = jsc.textFile("/Users/allen/bigdataapp/sparkdemo001/src/resources/spark.txt");
+        //JavaRDD<String> lines = jsc.textFile("/Users/allen/bigdataapp/sparkdemo001/src/resources/spark.txt");
+        JavaRDD<String> lines = jsc.textFile("hdfs://localhost:9000/user/allen/works_album_info.txt");
 
         JavaRDD<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
 
             @Override
             public Iterator<String> call(String line) throws Exception{
-                return Arrays.asList(line.split(" ")).iterator();
+                return Arrays.asList(line.split("\\t")).iterator();
             }
         });
 
