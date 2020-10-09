@@ -39,8 +39,9 @@ public class BroadcastVariableJava {
         multiRdd.foreach(new VoidFunction<Integer>() {
             @Override
             public void call(Integer integer) throws Exception {
-                System.out.println("value: "+integer);
+                System.out.println(Thread.currentThread()+", value: "+integer);
             }
         });
+        jsc.close();
     }
 }

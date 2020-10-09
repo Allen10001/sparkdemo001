@@ -70,8 +70,7 @@ public class SecondarySortJava {
 
         sortedlineRDD.unpersist();
         lines.unpersist();
-
-
+        jsc.close();
     }
 }
 

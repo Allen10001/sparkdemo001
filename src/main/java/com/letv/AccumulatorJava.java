@@ -40,7 +40,7 @@ public class AccumulatorJava {
         });
 
         System.out.println(((LongAccumulator) accumulator).value());
-
+        jsc.close();
 
     }
 
