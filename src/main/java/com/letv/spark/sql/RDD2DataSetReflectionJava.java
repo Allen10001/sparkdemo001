@@ -4,13 +4,12 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SQLContext;
 import org.apache.spark.sql.SparkSession;
 
 import java.util.List;
 
 /**
- * @Description P102
+ * @Description P102  1. 通过反射的方式加载 dataframe
  * @Author Allen
  * @Date 2020-10-10 15:04
  **/
@@ -23,7 +22,7 @@ public class RDD2DataSetReflectionJava {
                 .master("local[3]").getOrCreate();
 
         JavaSparkContext jsc = new JavaSparkContext(sparkSession.sparkContext());
-        SQLContext sqlContext = new SQLContext(jsc);
+        //SQLContext sqlContext = new SQLContext(jsc);
 
         // sparkSession.read().format("csv").option("header", "false").option("mode", "FAILFAST").schema();
         JavaRDD<String> lines = jsc.textFile("hdfs://localhost:9000/user/allen/spark/input/works_album_info.txt", 3);
@@ -42,7 +41,7 @@ public class RDD2DataSetReflectionJava {
         );
 
         // 用 java 写 spark 程序时没有 DataFrame, Dataset<Row> 就是 DataFrame
-        Dataset<Row> albumDf = sqlContext.createDataFrame(albumRdd, AlbumBean.class);
+        Dataset<Row> albumDf = sparkSession.createDataFrame(albumRdd, AlbumBean.class);
 
         // 将 dataframe 以 csv 文件的格式写出到 hdfs
         // albumDf.write().format("csv").mode("overwrite").option("sep", "\t").save("hdfs://localhost:9000/user/allen/spark/output1/");
@@ -53,8 +52,8 @@ public class RDD2DataSetReflectionJava {
         albumDf.registerTempTable("album");
 
         // 分析性能
-        sqlContext.sql("select id,name,screenYear from album where screenYear < 2000").explain();
-        Dataset oldAlbum = sqlContext.sql("select id,name,screenYear from album where screenYear < 2000");
+        sparkSession.sql("select id,name,screenYear from album where screenYear < 2000").explain();
+        Dataset oldAlbum = sparkSession.sql("select id,name,screenYear from album where screenYear < 2000");
 
         // dataframe 转为 rdd
         JavaRDD<Row> oldAlbumRdd = oldAlbum.javaRDD();
