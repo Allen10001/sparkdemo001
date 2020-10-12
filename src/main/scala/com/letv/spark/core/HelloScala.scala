@@ -1,7 +1,7 @@
-package com.letv
+package com.letv.spark.core
 
 /**
- * com.letv.Hello world!
+ * com.letv.spark.core.Hello world!
  */
 object Hello extends App {
   println( "Hello World!" )

@@ -1,4 +1,4 @@
-package com.letv;
+package com.letv.spark.core;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -24,7 +24,7 @@ public class WordCountJava {
 
         JavaSparkContext jsc = new JavaSparkContext(conf);
         //JavaRDD<String> lines = jsc.textFile("/Users/allen/bigdataapp/sparkdemo001/src/resources/spark.txt");
-        JavaRDD<String> lines = jsc.textFile("hdfs://localhost:9000/user/allen/works_album_info.txt");
+        JavaRDD<String> lines = jsc.textFile("hdfs://localhost:9000/user/allen/spark/input/works_album_info.txt");
 
         JavaRDD<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
 

@@ -1,4 +1,4 @@
-package com.letv
+package com.letv.spark.core
 
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkConf, SparkContext}
@@ -8,7 +8,11 @@ object LineCount {
     val conf = new SparkConf().setAppName("lineCount").setMaster("local[4]")
     val sc = new SparkContext(conf)
 
-    val lines = sc.textFile("/Users/allen/bigdataapp/sparkdemo001/src/resources/spark.txt",3)
+    // val lines = sc.textFile("/Users/allen/bigdataapp/sparkdemo001/src/resources/spark.txt",3)
+
+    // 读取 hdfs://localhost:9000/user/allen/spark/output1/ 文件夹下所有的数据
+    val lines = sc.textFile("hdfs://localhost:9000/user/allen/spark/output1/",3)
+    println("lines count:"+ lines.count())
 
     val linePairs = lines.map(line => (line, 1))
     val lineCounts = linePairs.reduceByKey(_+_)

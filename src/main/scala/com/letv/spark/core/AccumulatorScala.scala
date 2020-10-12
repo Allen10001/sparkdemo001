@@ -1,8 +1,6 @@
-package com.letv
-
+package com.letv.spark.core
 
 import org.apache.spark.util.LongAccumulator
-
 import org.apache.spark.{SparkConf, SparkContext}
 
 object AccumulatorScala {

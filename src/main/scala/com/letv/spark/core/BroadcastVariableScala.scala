@@ -1,4 +1,4 @@
-package com.letv
+package com.letv.spark.core
 
 import org.apache.spark.{SparkConf, SparkContext}
 

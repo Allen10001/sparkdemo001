@@ -1,4 +1,4 @@
-package com.letv;
+package com.letv.spark.core;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -30,7 +30,7 @@ public class SecondarySortJava {
                 .setMaster("local[3]");
 
         JavaSparkContext jsc = new JavaSparkContext(conf);
-        JavaRDD<String> lines = jsc.textFile("hdfs://localhost:9000/user/allen/works_album_info.txt");
+        JavaRDD<String> lines = jsc.textFile("hdfs://localhost:9000/user/allen/spark/input/works_album_info.txt");
 
         lines.persist(StorageLevel.MEMORY_ONLY());
 
