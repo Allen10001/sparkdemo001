@@ -97,6 +97,8 @@
       <version>${spark.version}</version>
       <scope>${scope.type}</scope>
     </dependency>
+
+    <!--netty-->
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-all</artifactId>
@@ -106,6 +108,13 @@
       <groupId>io.netty</groupId>
       <artifactId>netty</artifactId>
       <version>3.9.9.Final</version>
+    </dependency>
+
+    <!--kafka-->
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
+      <version>2.4.7</version>
     </dependency>
 
   </dependencies>
